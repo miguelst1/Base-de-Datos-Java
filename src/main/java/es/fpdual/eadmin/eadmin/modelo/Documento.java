@@ -3,7 +3,7 @@ package es.fpdual.eadmin.eadmin.modelo;
 import java.util.Date;
 
 public class Documento extends ElementoBaseAdministracionElectronica {
-
+	// hola
 	private final EstadoDocumento estado;
 
 	public Documento(Integer codigo, String nombre, Date fechaCreacion, Date fechaUltimaActualizacion, Boolean publico,
