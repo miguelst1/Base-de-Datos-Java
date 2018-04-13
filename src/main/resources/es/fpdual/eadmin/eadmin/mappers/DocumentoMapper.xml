@@ -21,4 +21,36 @@
 			#{documento.estado.codigo})
 	</insert>
 	
+	<update id="modificarDocumento">
+		UPDATE Elemento
+		SET Nombre = #{documento.nombre},
+			FechaCreacion = #{documento.fechaCreacion},
+			FechaUltimaModificacion = #{documento.fechaUltimaActualizacion},
+			Publico = #{documento.publico},
+			Tipo = 1,
+			EstadoDocumento = #{documento.estado.codigo}
+		WHERE Codigo = #{documento.codigo}
+	</update>
+	
+	<delete id="eliminarDocumento">
+		DELETE FROM Elemento
+		WHERE Codigo = #{codigo}
+	</delete>
+	
+	<select id="listarDocumentos" resultMap="MapaResultado">
+		SELECT Codigo, Nombre, FechaCreacion, FechaUltimaModificacion, Publico, EstadoDocumento
+		FROM Elemento WHERE Codigo = #{codigo}
+	</select>
+	
+	<resultMap id="MapaResultado" type="es.fpdual.eadmin.eadmin.modelo.Documento">
+        <constructor>
+  	 		<idArg column="Codigo" javaType="Integer"/>
+   			<arg column="Nombre" javaType="String"/>
+  			<arg column="FechaCreacion" javaType="Date"/>
+  			<arg column="FechaUltimaModificacion" javaType="Date"/>
+  			<arg column="Publico" javaType="Boolean"/>
+  			<arg column="EstadoDocumento" javaType="es.fpdual.eadmin.eadmin.modelo.EstadoDocumento"/>
+		</constructor>
+    </resultMap>
+	
 </mapper>

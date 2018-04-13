@@ -2,8 +2,12 @@ package es.fpdual.eadmin.eadmin.modelo;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Documento extends ElementoBaseAdministracionElectronica {
-	// hola
+
 	private final EstadoDocumento estado;
 
 	public Documento(Integer codigo, String nombre, Date fechaCreacion, Date fechaUltimaActualizacion, Boolean publico,
@@ -12,13 +16,59 @@ public class Documento extends ElementoBaseAdministracionElectronica {
 		this.estado = estado;
 	}
 
+	// public Documento(Integer codigo, String nombre, Date fechaCreacion, Date
+	// fechaUltimaActualizacion, Boolean publico,
+	// Integer estado) {
+	// super(codigo, nombre, fechaCreacion, fechaUltimaActualizacion, publico);
+	// switch (estado) {
+	// case 1:
+	// this.estado = EstadoDocumento.ACTIVO;
+	// break;
+	// case 2:
+	// this.estado = EstadoDocumento.APROBADO;
+	// break;
+	// case 3:
+	// this.estado = EstadoDocumento.ELIMINADO;
+	// break;
+	// default:
+	// this.estado = null;
+	// break;
+	// }
+	// }
+
 	public EstadoDocumento getEstado() {
 		return estado;
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Documento) {
+			final Documento param = (Documento) obj;
+			EqualsBuilder equalsBuilder = new EqualsBuilder();
+
+			equalsBuilder.appendSuper(super.equals(param));
+
+			equalsBuilder.append(this.estado, param.estado);
+
+			return equalsBuilder.isEquals();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+
+		hashCodeBuilder.appendSuper(super.hashCode());
+		hashCodeBuilder.append(this.estado);
+
+		return hashCodeBuilder.hashCode();
+	}
+
+	@Override
 	public String toString() {
-		return "Documento con código " + codigo;
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

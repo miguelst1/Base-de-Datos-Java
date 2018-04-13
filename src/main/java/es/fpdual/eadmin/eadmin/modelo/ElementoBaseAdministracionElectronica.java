@@ -2,15 +2,19 @@ package es.fpdual.eadmin.eadmin.modelo;
 
 import java.util.Date;
 
-public abstract  class ElementoBaseAdministracionElectronica {
-	
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+public abstract class ElementoBaseAdministracionElectronica {
+
 	protected final Integer codigo;
 	protected final String nombre;
 	protected final Date fechaCreacion;
 	protected final Date fechaUltimaActualizacion;
 	protected final Boolean publico;
-	
-	public ElementoBaseAdministracionElectronica(Integer codigo, String nombre, Date fechaCreacion, Date fechaUltimaActualizacion, Boolean publico) {
+
+	public ElementoBaseAdministracionElectronica(Integer codigo, String nombre, Date fechaCreacion,
+			Date fechaUltimaActualizacion, Boolean publico) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -30,28 +34,44 @@ public abstract  class ElementoBaseAdministracionElectronica {
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
-	
+
 	public Date getFechaUltimaActualizacion() {
 		return fechaUltimaActualizacion;
 	}
 
-
 	public Boolean getPublico() {
 		return publico;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		
 		if (obj instanceof ElementoBaseAdministracionElectronica) {
-			return codigo.equals(((ElementoBaseAdministracionElectronica) obj).getCodigo());
-		} 
+			final ElementoBaseAdministracionElectronica param = (ElementoBaseAdministracionElectronica) obj;
+			EqualsBuilder equalsBuilder = new EqualsBuilder();
+
+			equalsBuilder.append(this.codigo, param.codigo);
+			equalsBuilder.append(this.nombre, param.nombre);
+			equalsBuilder.append(this.fechaCreacion, param.fechaCreacion);
+			equalsBuilder.append(this.fechaUltimaActualizacion, param.fechaUltimaActualizacion);
+			equalsBuilder.append(this.publico, param.publico);
+
+			return equalsBuilder.isEquals();
+		}
+
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return codigo.hashCode();
+		final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+
+		hashCodeBuilder.append(this.codigo);
+		hashCodeBuilder.append(this.nombre);
+		hashCodeBuilder.append(this.fechaCreacion);
+		hashCodeBuilder.append(this.fechaUltimaActualizacion);
+		hashCodeBuilder.append(this.publico);
+
+		return hashCodeBuilder.hashCode();
 	}
-	
+
 }

@@ -13,4 +13,17 @@ public enum EstadoDocumento {
 	public int getCodigo() {
 		return codigo;
 	}
+
+	public static EstadoDocumento obtenerPorCodigo(Integer codigo) {
+		switch (codigo) {
+		case 1:
+			return EstadoDocumento.ACTIVO;
+		case 2:
+			return EstadoDocumento.APROBADO;
+		case 3:
+			return EstadoDocumento.ELIMINADO;
+		default:
+			return null;
+		}
+	}
 }
